@@ -23,6 +23,7 @@ namespace TechJobsConsole
             LoadData();
 
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            string lowerCaseValue = value.ToLower();
 
             foreach (Dictionary<string, string> job in AllJobs)
             {
@@ -30,7 +31,7 @@ namespace TechJobsConsole
 
                 foreach (string key in keys)
                 {
-                    if (job[key].Contains(value) && !jobs.Contains(job))
+                    if (job[key].ToLower().Contains(lowerCaseValue) && !jobs.Contains(job))
                     {
                         jobs.Add(job);
                     }
@@ -67,12 +68,13 @@ namespace TechJobsConsole
             LoadData();
 
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            string lowerCaseValue = value.ToLower();
 
             foreach (Dictionary<string, string> row in AllJobs)
             {
-                string aValue = row[column];
+                string aValue = row[column].ToLower();
 
-                if (aValue.Contains(value))
+                if (aValue.Contains(lowerCaseValue))
                 {
                     jobs.Add(row);
                 }
