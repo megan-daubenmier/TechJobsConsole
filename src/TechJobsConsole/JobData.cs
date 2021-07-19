@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Linq;
 
 namespace TechJobsConsole
 {
@@ -14,6 +15,28 @@ namespace TechJobsConsole
         {
             LoadData();
             return AllJobs;
+        }
+        
+        public static List<Dictionary<string,string>> FindByValue(string value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+                List<string> keys = job.Keys.ToList();
+
+                foreach (string key in keys)
+                {
+                    if (job[key].Contains(value) && !jobs.Contains(job))
+                    {
+                        jobs.Add(job);
+                    }
+                }
+            }
+            return jobs;
         }
 
         /*
